@@ -6,11 +6,13 @@ from generator import generate_grid
 
 class Launch():
     
-    #Titre, grille et menu
     def __init__(self, gui, nb_missing_values):
-        
+        """
+        Args :
+                gui (Tk) : fenêtre Tkinter
+                nb_missing_values (int) : nombre de cases vides dans chaque nouvelle grille
+        """     
 
-        #Titre et paramètres
         self.gui = gui
         gui.geometry('300x300')
         gui.title("Sudoku Solver")
@@ -42,6 +44,11 @@ class Launch():
                 
 
     def solveGrid(self):
+        """
+        Compare les saisies de l'utilisateur à la solution, puis remplit la grille
+        Vert => saisies correctes
+        Rouge => saisies erronées
+        """
         has_error = False
         self.solve_mode = True
         for i in range(len(grid)):
@@ -60,6 +67,12 @@ class Launch():
 
     #Vérifie si la grille est correcte
     def checkGrid(self, event):
+        """
+        Valide les valeurs saisies et met à jour leur couleur
+
+        Args: 
+            event (Event) : l'événement Tkinter qui a déclenché la vérification
+        """
         for i in range(len(grid)):
             for j in range(len(grid)):
                 if grid[i][j].get() == '':
@@ -77,13 +90,14 @@ class Launch():
                             self.__table[i][j].config(fg='blue')
         
       
-    #supprime des valeurs
     def newGrid(self):
+        """
+        Génère une nouvelle grille et construit les widgets qui l'affichent
+        """
 
         self.solved_grid = generate_grid(self.nb_missing_values)
         self.solve_mode = False
 
-        #Grille front-end
         font = ('Arial', 18)
         self.__table = []
         for i in range(len(grid)):
@@ -114,4 +128,4 @@ class Launch():
                 self.__table[i][j].grid(row=i, column=j)
 
 
-gui = Tk() #création de la fenêtre
+gui = Tk()

@@ -3,16 +3,20 @@ from random import randint #importation du module random
 from grid import grid
 from solver import solve_sudoku
 
-
-#générer une grille sudoku
 def generate_grid(nb_missing_values):
-  
-  #mise à zero de la grille
-  for y in range(len(grid)): #parcourt les lignes
-    for x in range(len(grid)): #parcourt les colonnes
+  """
+  Génère une nouvelle grille de sudoku.
+
+  Args: 
+        nb_missing_values (int) : nombre de cases à vider dans la grille
+
+  Returns:
+        list : la solution complètes, sous forme de lsite 9*9
+  """
+  for y in range(len(grid)): 
+    for x in range(len(grid)): 
         grid[y][x].set('') 
 
-  #initiliaser la grilles avec 9 valeurs de 1 à 9 placées au hasard
   for n in range(1,10):
     while True:
       x=randint(0,len(grid)-1)
@@ -21,19 +25,16 @@ def generate_grid(nb_missing_values):
         grid[y][x].set(str(n))
         break
 
-  #solutionner la grille      
   solve_sudoku()
 
   print_grid(grid)
 
-  #copier la grille dans matrice solved_grid
   solved_grid=[[]]
-  for y in range(len(grid)): #parcourt les lignes
+  for y in range(len(grid)): 
         solved_grid += [[]]
-        for x in range(len(grid)): #parcourt les colonnes
+        for x in range(len(grid)): 
             solved_grid[y].append(grid[y][x].get())
 
-  #mettre nb_missing_values à '' dans la grille
   for i in range(nb_missing_values):
     while True:
       x=randint(0,len(grid)-1)
@@ -47,6 +48,11 @@ def generate_grid(nb_missing_values):
 
 #imprimer une grille
 def print_grid(grid):
+    """Affiche une grille dans la console
+    
+    Args: 
+            grid (list) : list 9*9 d'objets StringVar de Tkinter à afficher
+    """
     for i in range(len(grid)):
       if i % 3 == 0 and i != 0:
          print("- - - - - - - - - - - -")
