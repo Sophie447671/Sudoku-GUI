@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+# Environnement virtuels
+venv/
+.venv/
+env/
+# Éditeurs
+.vscode/
+
